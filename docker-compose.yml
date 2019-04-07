@@ -1,0 +1,12 @@
+version: '3'
+
+services:
+  gem:
+    build:
+      context: .
+    volumes:
+      - ./:/app
+      - bundle:/vendor/bundle
+
+volumes:
+  bundle:
