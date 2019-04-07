@@ -1,17 +1,17 @@
 
 lib = File.expand_path("../lib", __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "grpc/prometheus/version"
+require "grpc_prometheus/version"
 
 Gem::Specification.new do |spec|
-  spec.name          = "grpc-prometheus"
-  spec.version       = Grpc::Prometheus::VERSION
+  spec.name          = "grpc_prometheus"
+  spec.version       = GRPCPrometheus::VERSION
   spec.authors       = ["Yuya Takeyama"]
   spec.email         = ["sign.of.the.wolf.pentagram@gmail.com"]
 
   spec.summary       = %q{Monitor gRPC server}
   spec.description   = %q{Expose a Prometheus metric endpoint to monitor gRPC server}
-  spec.homepage      = "https://github.com/yuya-takeyama/ruby-grpc-prometheus"
+  spec.homepage      = "https://github.com/yuya-takeyama/ruby-grpc_prometheus"
   spec.license       = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
@@ -21,7 +21,7 @@ Gem::Specification.new do |spec|
 
     spec.metadata["homepage_uri"] = spec.homepage
     spec.metadata["source_code_uri"] = spec.homepage
-    spec.metadata["changelog_uri"] = "https://github.com/yuya-takeyama/ruby-grpc-prometheus/blob/master/CHANGELOG.md"
+    spec.metadata["changelog_uri"] = "https://github.com/yuya-takeyama/ruby-grpc_prometheus/blob/master/CHANGELOG.md"
   else
     raise "RubyGems 2.0 or newer is required to protect against " \
       "public gem pushes."

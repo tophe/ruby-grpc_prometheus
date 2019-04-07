@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    grpc-prometheus (0.1.0)
+    grpc_prometheus (0.1.0)
       grpc (~> 1.7)
 
 GEM
@@ -21,7 +21,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.17)
-  grpc-prometheus!
+  grpc_prometheus!
   minitest (~> 5.0)
   rake (~> 10.0)
 
