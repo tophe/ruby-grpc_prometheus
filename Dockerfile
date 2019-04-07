@@ -1,5 +1,6 @@
 FROM ruby:2.6.2
 
 ENV BUNDLE_PATH /vendor/bundle
+ENV BUNDLE_FORCE_RUBY_PLATFORM 1
 WORKDIR /app
 ADD . /app

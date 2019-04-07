@@ -2,10 +2,17 @@ PATH
   remote: .
   specs:
     grpc-prometheus (0.1.0)
+      grpc (~> 1.7)
 
 GEM
   remote: https://rubygems.org/
   specs:
+    google-protobuf (3.7.1)
+    googleapis-common-protos-types (1.0.4)
+      google-protobuf (~> 3.0)
+    grpc (1.19.0)
+      google-protobuf (~> 3.1)
+      googleapis-common-protos-types (~> 1.0.0)
     minitest (5.11.3)
     rake (10.5.0)
 
