@@ -1,12 +1,23 @@
 PATH
   remote: .
   specs:
-    grpc-prometheus (0.1.0)
+    grpc_prometheus (0.1.0)
+      grpc (~> 1.7)
+      prometheus-client
 
 GEM
   remote: https://rubygems.org/
   specs:
+    google-protobuf (3.7.1)
+    googleapis-common-protos-types (1.0.4)
+      google-protobuf (~> 3.0)
+    grpc (1.19.0)
+      google-protobuf (~> 3.1)
+      googleapis-common-protos-types (~> 1.0.0)
     minitest (5.11.3)
+    prometheus-client (0.9.0)
+      quantile (~> 0.2.1)
+    quantile (0.2.1)
     rake (10.5.0)
 
 PLATFORMS
@@ -14,7 +25,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.17)
-  grpc-prometheus!
+  grpc_prometheus!
   minitest (~> 5.0)
   rake (~> 10.0)
 
