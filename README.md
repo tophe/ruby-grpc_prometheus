@@ -1,8 +1,8 @@
 # GRPCPrometheus
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/grpc/prometheus`. To experiment with that code, run `bin/console` for an interactive prompt.
+Export a metric endpoint of gRPC services in Ruby for Prometheus.
 
-TODO: Delete this and the text above, and describe your gem
+This aims to behave basically the same as [grpc-ecosystem/go-grpc-prometheus](https://github.com/grpc-ecosystem/go-grpc-prometheus)
 
 ## Installation
 
@@ -22,7 +22,23 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+This gem collect metrics from a server interceptor.
+
+```rb
+# Create an instance of server metrics
+metrics = GRPCPrometheus::ServerMetrics.new
+# Launch a web server to expose the metric endpoint using WEBrick.
+# All of the arguments are default values (you can omit them).
+metrics.start_metric_endpoint_in_background(bind: '0.0.0.0', port: 19191, metrics_path: '/metrics')
+
+# Create a gRPC server with server interceptor of server metrics
+server = GRPC::RpcServer.new(interceptors: [metrics.server_interceptor])
+server.add_http2_port('0.0.0.0:3000', :this_port_is_insecure)
+server.handle(UsersService)
+# Pre-register 0 to metrics for every methods and error codes
+metrics.initialize_metrics(server)
+server.run_till_terminated
+```
 
 ## Development
 
