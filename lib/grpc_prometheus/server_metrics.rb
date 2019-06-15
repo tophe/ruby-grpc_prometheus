@@ -46,16 +46,16 @@ module GRPCPrometheus
       end
     end
 
-    def start_metric_endpoint_in_background
+    def start_metric_endpoint_in_background(bind: '0.0.0.0', port: 19191, metrics_path: '/metrics')
       config = {
-        BindAddress: '0.0.0.0',
-        Port: 24231,
+        BindAddress: bind,
+        Port: port,
         MaxClients: 5,
         Logger: ::WEBrick::Log.new(STDERR, ::WEBrick::Log::FATAL),
         AccessLog: [],
       }
       server = ::WEBrick::HTTPServer.new(config)
-      server.mount('/metric', MonitorServlet, @registry)
+      server.mount(metrics_path, MonitorServlet, @registry)
       Thread.start do
         server.start
       end
