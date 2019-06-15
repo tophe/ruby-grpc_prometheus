@@ -14,6 +14,7 @@ GEM
     grpc (1.19.0)
       google-protobuf (~> 3.1)
       googleapis-common-protos-types (~> 1.0.0)
+    grpc-tools (1.21.0)
     minitest (5.11.3)
     prometheus-client (0.9.0)
       quantile (~> 0.2.1)
@@ -25,6 +26,7 @@ PLATFORMS
 
 DEPENDENCIES
   bundler (~> 1.17)
+  grpc-tools
   grpc_prometheus!
   minitest (~> 5.0)
   rake (~> 10.0)
