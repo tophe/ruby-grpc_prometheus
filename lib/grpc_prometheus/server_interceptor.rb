@@ -16,7 +16,6 @@ module GRPCPrometheus
       grpc_err = to_grpc_err(err)
       raise err
     ensure
-      binding.pry
       if grpc_err
         reporter.handled(Util::ALL_CODES[grpc_err.code])
       else
