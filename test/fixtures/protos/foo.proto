@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package yuya.takeyama.test;
+
+service Foo {
+	rpc Unary (Input) returns (Output) {}
+	rpc ClientStream (stream Input) returns (Output) {}
+	rpc ServerStream (Input) returns (stream Output) {}
+	rpc BidiStream (stream Input) returns (stream Output) {}
+}
+
+message Input {
+}
+
+message Output {
+}

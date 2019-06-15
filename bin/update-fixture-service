@@ -1,0 +1,6 @@
+#!/bin/bash
+
+set -eu
+set -o pipefail
+
+docker-compose run --rm gem bundle exec grpc_tools_ruby_protoc -I test/fixtures/protos --ruby_out test/fixtures/lib --grpc_out test/fixtures/lib test/fixtures/protos/foo.proto
