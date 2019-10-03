@@ -10,6 +10,7 @@ module GRPCPrometheus
         method: method,
         grpc_type: GRPCType::UNARY,
       )
+      reporter.process_started
       grpc_err = nil
       yield
     rescue => err
@@ -21,6 +22,7 @@ module GRPCPrometheus
       else
         reporter.handled(Util::ALL_CODES[::GRPC::Core::StatusCodes::OK])
       end
+      reporter.process_ended
     end
 
     # These metrics for streaming messages can't be collected

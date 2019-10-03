@@ -5,7 +5,8 @@ require 'webrick'
 module GRPCPrometheus
   class ServerMetrics
     attr_reader :server_started_counter,
-                :server_handled_counter
+                :server_handled_counter,
+                :server_processing_gauge
 
     def initialize
       @registry = ::Prometheus::Client.registry
@@ -16,6 +17,10 @@ module GRPCPrometheus
       @server_handled_counter = @registry.counter(
         :grpc_server_handled_total,
         'Total number of RPCs completed on the server, regardless of success or failure.',
+      )
+      @server_processing_gauge = @registry.gauge(
+        :grpc_server_processing,
+        'Number of requests currently being processed'
       )
     end
 

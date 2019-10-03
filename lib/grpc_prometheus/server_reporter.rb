@@ -13,11 +13,23 @@ module GRPCPrometheus
         increment(@labels)
     end
 
-   def handled(code)
+    def handled(code)
       labels = @labels.dup.merge({ grpc_code: code })
       @server_metrics.
         server_handled_counter.
         increment(labels)
+    end
+
+    def process_started
+      @server_metrics.
+        server_processing_gauge.
+        increment(@labels)
+    end
+
+    def process_ended
+      @server_metrics.
+        server_processing_gauge.
+        decrement(@labels)
     end
   end
 end
