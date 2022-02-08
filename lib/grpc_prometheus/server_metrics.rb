@@ -4,19 +4,35 @@ require 'webrick'
 
 module GRPCPrometheus
   class ServerMetrics
-    attr_reader :server_started_counter,
-                :server_handled_counter
+    attr_accessor :server_started_counter,
+                :server_handled_counter,
+                  :summary
 
     def initialize
       @registry = ::Prometheus::Client.registry
-      @server_started_counter = @registry.counter(
+      @server_started_counter = Prometheus::Client::Counter.new(
         :grpc_server_started_total,
-        'Total number of RPCs started on the server.',
+        docstring: 'Total number of RPCs started on the server.',
+      labels: [:grpc_service, :grpc_method, :grpc_type]
       )
-      @server_handled_counter = @registry.counter(
+
+      @registry.register(@server_started_counter)
+
+
+      @server_handled_counter = Prometheus::Client::Counter.new(
         :grpc_server_handled_total,
-        'Total number of RPCs completed on the server, regardless of success or failure.',
+        docstring: 'Total number of RPCs completed on the server, regardless of success or failure.',
+       labels: [:grpc_service, :grpc_method, :grpc_type, :grpc_code]
       )
+      @registry.register(@server_handled_counter)
+
+
+      @summary = Prometheus::Client::Summary.new(:service_latency_seconds, docstring: 'latency in ms',
+                                                 labels: [:grpc_service, :grpc_method, :grpc_type, :grpc_code])
+
+      @registry.register(@summary)
+
+
     end
 
     def server_interceptor

@@ -5,11 +5,17 @@ module GRPCPrometheus
     end
 
     def request_response(request: nil, call: nil, method: nil)
+
       reporter = ServerReporter.new(
         server_metrics: @server_metrics,
         method: method,
         grpc_type: GRPCType::UNARY,
       )
+
+
+
+
+      start_time = Time.now
       grpc_err = nil
       yield
     rescue => err
@@ -17,9 +23,9 @@ module GRPCPrometheus
       raise err
     ensure
       if grpc_err
-        reporter.handled(Util::ALL_CODES[grpc_err.code])
+        reporter.handled(Util::ALL_CODES[grpc_err.code], start_time)
       else
-        reporter.handled(Util::ALL_CODES[::GRPC::Core::StatusCodes::OK])
+        reporter.handled(Util::ALL_CODES[::GRPC::Core::StatusCodes::OK], start_time)
       end
     end
 
