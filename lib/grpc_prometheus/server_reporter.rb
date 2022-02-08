@@ -18,7 +18,6 @@ module GRPCPrometheus
 
 
    def handled(code, start_time)
-     p code
       labels = @labels.dup.merge({ grpc_code: code })
 
       @server_metrics.
